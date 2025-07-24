@@ -3,74 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sai Prabhanj Turaga - Portfolio</title>
+  <title>Sai Prabhanj Turaga</title>
   <style>
-    /* Reset some default styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f5f7fa;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fa;
       color: #333;
       line-height: 1.6;
       padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      padding-bottom: 30px;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.2rem;
-      color: #007acc;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      color: #555;
+      transition: background 0.3s, color 0.3s;
     }
 
     .container {
       max-width: 900px;
-      margin: 0 auto;
+      margin: auto;
       background: #fff;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
     }
 
-    section {
-      margin-bottom: 40px;
+    header {
+      text-align: center;
+      margin-bottom: 30px;
     }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #007acc;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      margin-top: 15px;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #005a9e;
+    }
+
+    section { margin-bottom: 40px; }
 
     h2 {
       font-size: 1.8rem;
       margin-bottom: 15px;
       border-bottom: 2px solid #007acc;
       padding-bottom: 5px;
-      color: #007acc;
     }
 
-    ul.skills-list {
-      list-style: none;
+    #skills .skills {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 10px;
     }
 
-    ul.skills-list li {
-      background: #007acc;
-      padding: 8px 15px;
-      border-radius: 30px;
-      color: white;
-      font-weight: 600;
-      font-size: 0.9rem;
+    .skill-bar {
+      background: #e3edf7;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #007acc, #52caff);
+      width: 0;
     }
 
     .projects {
@@ -79,51 +89,124 @@
       gap: 20px;
     }
 
-    .project {
-      background: #e9f1fb;
+    .project-card {
+      background: #eef5fb;
       padding: 15px;
       border-radius: 8px;
-      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .project h3 {
+    .project-card h3 {
       margin-bottom: 10px;
-      color: #005a9e;
-    }
-
-    .project p {
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-    }
-
-    .project a {
       color: #007acc;
-      text-decoration: none;
-      font-weight: 600;
     }
 
-    .project a:hover {
-      text-decoration: underline;
+    .project-card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .project-card.open .project-details {
+      max-height: 300px;
+      margin-top: 10px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    form button {
+      background: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #msg {
+      display: block;
+      margin-top: 10px;
+      color: green;
+    }
+
+    button.toggle-mode {
+      margin: 15px auto;
+      display: block;
+      background: none;
+      border: 2px solid #007acc;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #007acc;
     }
 
     footer {
       text-align: center;
+      color: #777;
       font-size: 0.9rem;
-      color: #666;
-      margin-top: 50px;
+      margin-top: 40px;
     }
 
-    @media (max-width: 600px) {
-      .projects {
-        grid-template-columns: 1fr;
-      }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Dark Mode */
+    body.dark {
+      background: #141d26;
+      color: #ecf3fa;
+    }
+
+    body.dark .container {
+      background: #1f2a36;
+    }
+
+    body.dark a, body.dark button.toggle-mode {
+      color: #aad7ff;
+    }
+
+    body.dark .skill-bar {
+      background: #2c3945;
+    }
+
+    body.dark .project-card {
+      background: #273544;
+    }
+
+    body.dark input, body.dark textarea {
+      background: #2c3945;
+      color: #ecf3fa;
+      border: 1px solid #aaa;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Sai Prabhanj Turaga</h1>
-    <p>Data Engineer | AI Enthusiast </p>
+    <p>Data Engineer • AI Enthusiast</p>
+    <button class="toggle-mode" onclick="toggleTheme()">Toggle Dark Mode</button>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
   <div class="container">
@@ -132,50 +215,87 @@
       <p>
         Hello! I'm Sai Prabhanj Turaga, a seasoned senior engineer with a decade of expertise in the field of Big Data technologies , multiple Cloud, Data and AI. I enjoy turning ideas into reality using code and design.
       </p>
+      </p>
     </section>
 
     <section id="skills">
       <h2>Skills</h2>
-      <ul class="skills-list">
-        <li>PySpark</li>
-        <li>Hadoop</li>
-        <li>NoSQL</li>
-        <li>AWS</li>
-        <li>GCP</li>
-        <li>Git & GitHub</li>
-        <li>Python</li>
-        <li>AI</li>
-        <li>langchain</li>
-        <li>VectorDB</li>
-        <li>Airflow</li>
-        <li>Snowflake</li>
-        <li>DBT</li>
-        <li>Kafka</li>
-        <li>Nifi</li>
-        <li>Unix</li>
-      </ul>
-    </section>
-
-
-    <section id="certifications">
-      <h2>Certifications</h2>
-      <ul class="skills-list">
-        <li>AWS Certified Solutions Architect - Associate</li>
-        <li>Google Cloud Certified Professional Data Engineer</li>
-        <li>Google Cloud Certified Professional Security Engineer</li>
-      </ul>
+      <div class="skills">
+        <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+        <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+      </div>
+      <p>PySpark • Python • Hadoop • NoSQL • AWS • GCP • AI • Langchain • RAG • VectorDB • Hive • Airflow • Terraform • Snowflake • DBT • Kafka • Nifi • Unix shell scripting • Scala • </p>
     </section>
     
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <div class="skills">
+        <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+        <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+      </div>
+      <p> AWS Certified Solutions Architect - Associate • Google Cloud Certified Professional Data Engineer • Google Cloud Certified Professional Security Engineer  </p>
+    </section>
+
+
+    
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="project-card" onclick="this.classList.toggle('open')">
+          <h3><a href="#" target="_blank">Project 1</a></h3>
+          <p>Short description of the project.</p>
+          <div class="project-details">
+            <p>Detailed info about the project: goals, tools, and learnings.</p>
+          </div>
+        </div>
+        <div class="project-card" onclick="this.classList.toggle('open')">
+          <h3><a href="#" target="_blank">Project 2</a></h3>
+          <p>Short description of the project.</p>
+          <div class="project-details">
+            <p>Detailed overview of the project and your role in it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="contact">
       <h2>Contact</h2>
-      <p>
-        Feel free to reach out via <a href="mailto:tsaiprabhanj@gmail.com">email</a> or connect with me on <a href="https://www.linkedin.com/in/sai-prabhanj-turaga" target="_blank" rel="noopener">LinkedIn</a>.
-      </p>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your name" required />
+        <input type="email" name="email" placeholder="Your email" required />
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button type="submit">Send</button>
+        <span id="msg"></span>
+      </form>
     </section>
   </div>
 
   <footer>
-    &copy; 2025 Sai Prabhanj Turaga. Built with GitHub Pages.
+    &copy; 2025 Sai Prabhanj Turaga. Built with ❤️ and shared on GitHub Pages.
   </footer>
+
+  <script>
+    // Animate Progress Bars
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.skill-progress').forEach(el => {
+        const width = el.getAttribute('data-width');
+        el.style.width = width;
+      });
+    });
+
+    // Contact Form Feedback
+    document.getElementById('contact-form').onsubmit = function (e) {
+      e.preventDefault();
+      document.getElementById('msg').innerText = 'Message Sent! (This is a demo)';
+      this.reset();
+    };
+
+    // Dark Mode Toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
 </body>
 </html>
